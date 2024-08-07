@@ -95,6 +95,9 @@ function netmaskToNumber(netmask) {
   return parseInt(netmask, 16);
 }
 
+
+
+
 function numberToIP(number) {
   return [
     (number >>> 24) & 0xff,
