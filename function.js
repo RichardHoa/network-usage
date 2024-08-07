@@ -72,6 +72,7 @@ export function otherHostsReport(CIDRNotation) {
   );
 }
 
+
 export function calculateCIDRFromBroadcastAndNetmask(broadcast, netmask) {
   const broadcastIP = ipToNumber(broadcast);
   const netmaskIP = netmaskToNumber(netmask);
@@ -94,9 +95,6 @@ function ipToNumber(ip) {
 function netmaskToNumber(netmask) {
   return parseInt(netmask, 16);
 }
-
-
-
 
 function numberToIP(number) {
   return [
