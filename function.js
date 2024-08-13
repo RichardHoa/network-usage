@@ -14,7 +14,8 @@ export async function getNetworkDetails() {
       throw new Error(stderr);
     }
 
-    const en0SectionRegex = /en0:\s+.*?(?=\n\w|\Z)/s;
+    const en0SectionRegex =/en0:\s+[\s\S]*?(?=\n\w|\Z)/
+
     const en0SectionMatch = en0SectionRegex.exec(stdout);
 
     if (!en0SectionMatch) {
@@ -22,6 +23,7 @@ export async function getNetworkDetails() {
     }
 
     const en0Section = en0SectionMatch[0];
+    console.log(en0Section)
 
     const broadcastRegex = /broadcast\s+(\d+\.\d+\.\d+\.\d+)/;
     const netmaskRegex = /netmask\s+(0x[0-9a-fA-F]+)/i;
@@ -32,6 +34,7 @@ export async function getNetworkDetails() {
     };
 
     const broadcastMatch = broadcastRegex.exec(en0Section);
+    console.log("broadcastmatch",broadcastMatch)
     if (broadcastMatch) {
       networkDetails.broadcast = broadcastMatch[1];
     } else {
@@ -56,7 +59,7 @@ export function otherHostsReport(CIDRNotation) {
   console.log(
     "We are displaying the hosts in the network beside you, please wait..."
   );
-  console.log(CIDRNotation)
+  // console.log(CIDRNotation)
   exec(
     `fping -a -q -g ${CIDRNotation} | grep -v \"duplicate\" | wc -l | awk '{print $1-1}'`,
     (error, stdout, stderr) => {
